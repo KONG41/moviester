@@ -8,7 +8,11 @@ const config = {
 };
 
 const m_config = {
-    baseURL: 'https://moviester-api-py.vercel.app'
+    baseURL: 'https://moviester-api-py.vercel.app',
+    headers:{
+        'Accept': '*/*',
+        'Connection': 'keep-alive'
+    }
 }
 
 export const thumbnailPath = "https://image.tmdb.org/t/p/w342";
@@ -66,4 +70,8 @@ export const getGenreMovies = (page: number, genre: number):Promise<AxiosRespons
 
 export const getHomes = ():Promise<AxiosResponse<any>> => {
     return axios.get('/home?suggest=all', m_config);
+}
+
+export const getSliders = ():Promise<AxiosResponse<any>> => {
+    return axios.get('/sliders', m_config);
 }

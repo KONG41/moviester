@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import Slider, { Settings } from "react-slick";
-import { getPopularMovies, backdropPath } from "../helper";
+import { getPopularMovies, backdropPath, getSliders } from "../helper";
 
 interface Movie {
   id: number,
@@ -9,16 +9,21 @@ interface Movie {
   title: string,
   vote_average: number,
   release_date: string,
-  overview: string
+  overview: string,
+  cover: string,
+  link: string,
+  year: string
+  imdb:string,
+  quality: string
 }
 
 const PopularMovieSlider = () => {
-  const [popularMovies, setPopularMovies] = React.useState(null as Movie[]);
+  const [sliderMovies, setSliderMovies] = React.useState(null as Movie[]);
   const history = useHistory();
 
   React.useEffect(() => {
-    getPopularMovies().then((respone) => {
-      setPopularMovies(respone.data.results.slice(0, 5));
+    getSliders().then((respone) => {
+      setSliderMovies(respone.data.data);
     });
   }, []);
 
@@ -34,20 +39,20 @@ const PopularMovieSlider = () => {
 
   return (
     <div className="slider">
-      {!!popularMovies && <Slider {...settings}>
-        {popularMovies.map((movie) => {
-          return <div key={movie.id} className="slider__slide">
-            <div className="slider__slide__image" style={{ backgroundImage: `url(${backdropPath}/${movie.backdrop_path})` }}>
+      {!!sliderMovies && <Slider {...settings}>
+        {sliderMovies.map((movie) => {
+          return <div key={movie.title} className="slider__slide">
+            <div className="slider__slide__image" style={{ backgroundImage: `url(${movie.cover})` }}>
               <div className="container">
                 <div className="slider__info" >
-                  <Link to={`/movies/${movie.id}`} className="slider__info__link">
+                  <Link to={movie.link} className="slider__info__link">
                     <h1>{movie.title}</h1>
                   </Link>
                   <div className="slider__info__meta">
-                    <a><i className="far fa-calendar-alt"></i> {movie.release_date}</a>
-                    <a><i className="fas fa-star"></i> {movie.vote_average}</a>
+                    <a><i className="far fa-calendar-alt"></i> {movie.year}</a>
+                    <a><i className="fas fa-star"></i> {movie.imdb}</a>
                   </div>
-                  <div className="slider__info__desc">{movie.overview}</div>
+                  <div className="slider__info__desc">{movie.quality}</div>
                 </div>
               </div>
             </div>

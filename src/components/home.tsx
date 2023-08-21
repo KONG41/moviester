@@ -8,7 +8,8 @@ interface Movie {
     title: string,
     release_date: string,
     poster_path: string,
-    vote_average: number
+    vote_average: number,
+    movies: any
 }
 const Home = () => {
     React.useEffect(() => {
@@ -19,7 +20,7 @@ const Home = () => {
     console.log(homeMovies)
     React.useEffect(() => {
         getHomes().then((respone) => {
-            setHomeMovies(respone.data.results);
+            setHomeMovies(respone.data.data);
         });
     }, []);
     return (
@@ -28,23 +29,28 @@ const Home = () => {
             {/* <TrendingMovies />
             <TopMovies />
             <PopularMovies /> */}
-
-            {/* <section className="container container--pall">
-                {!!trendingMovies &&
+             {!!homeMovies &&
+                homeMovies.map((item)=>(
+                    <section className="container container--pall">
                     <div className="trending">
-                        <h2 className="trending__title">Trending movies</h2>
+                      
+                        <h2 className="trending__title">{item.title}</h2>
                         <div className="trending__movies">
-                            {trendingMovies.map((movie) => {
+                            {item.movies.map((movie:any) => {
                                 return (
-                                    <MovieCard key={movie.id}
-                                        poster={movie.poster_path}
-                                        releaseDate={movie.release_date}
-                                        title={movie.title} id={movie.id}
-                                        voteAverage={movie.vote_average} />)
+                                    <MovieCard key={movie.title}
+                                        poster={movie.cover}
+                                        releaseDate={movie.year}
+                                        title={movie.title}
+                                        id={movie.link}
+                                        voteAverage={movie.imdb} />)
                             })}
                         </div>
-                    </div>}
-            </section> */}
+                    </div>
+                    </section>
+                ))
+           
+            }
         </>
     );
 }
