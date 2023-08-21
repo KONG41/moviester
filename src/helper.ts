@@ -7,6 +7,10 @@ const config = {
     headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NmRjZGZlMjJiN2M5ODIwMmMwY2FiOGM0YWFhNGE0ZCIsInN1YiI6IjYwZDMwODJlMzVjMzBhMDA3M2Q5YjQ0YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lXL2hpo8gSurs41a1xLIZGzcoCj9wanresHwGv_apPs` }
 };
 
+const m_config = {
+    baseURL: 'https://moviester-api-py.vercel.app'
+}
+
 export const thumbnailPath = "https://image.tmdb.org/t/p/w342";
 export const backdropPath = "https://image.tmdb.org/t/p/w1280";
 export const posterPath = "https://image.tmdb.org/t/p/w342";
@@ -56,4 +60,10 @@ export const getCastDetail = (id: number):Promise<AxiosResponse<any>> => {
 
 export const getGenreMovies = (page: number, genre: number):Promise<AxiosResponse<any>> => {
     return axios.get(`/discover/movie?language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&vote_average.gte=1&with_genres=${genre}`, config);
+}
+
+//moviester API
+
+export const getHomes = ():Promise<AxiosResponse<any>> => {
+    return axios.get('/home?suggest=all', m_config);
 }
