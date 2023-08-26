@@ -13,7 +13,7 @@ interface Movie {
 }
 const Home = () => {
     React.useEffect(() => {
-        document.title = 'Home - FMovies';
+        document.title = 'Home - Moviester';
     }, []);
     
     const [homeMovies, setHomeMovies] = React.useState(null as Movie[]);
@@ -26,9 +26,6 @@ const Home = () => {
     return (
         <>
             <PopularMovieSlider />
-            {/* <TrendingMovies />
-            <TopMovies />
-            <PopularMovies /> */}
              {!!homeMovies &&
                 homeMovies.map((item)=>(
                     <section className="container container--pall">

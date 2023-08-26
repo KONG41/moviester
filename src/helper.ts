@@ -75,3 +75,10 @@ export const getHomes = ():Promise<AxiosResponse<any>> => {
 export const getSliders = ():Promise<AxiosResponse<any>> => {
     return axios.get('/sliders', m_config);
 }
+
+export const getDetailMovie = (id: string):Promise<AxiosResponse<any>> => {
+    return axios.get(`/movie_detail?id=/movie/${id}`, m_config);
+}
+// export const getByGenreMovies = (page:number):Promise<AxiosResponse<any>> => {
+//     return axios.get(`genre/action?page=${page}`)
+// }

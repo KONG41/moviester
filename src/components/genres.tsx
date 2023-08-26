@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 import { Route, Switch, useHistory, useParams, useRouteMatch, useLocation } from "react-router-dom";
 import { getGenreMovies } from "../helper";
 import MovieCard from "./movieCard";
@@ -21,13 +21,17 @@ interface Props {
 const Genre = (props: Props) => {
   const { id, page } = useParams<{ id?: string, page?: string }>();
 
-  const [genreMovies, setGenreMovies] = React.useState(null as Movie[]);
-  const [totalPages, setTotalPages] = React.useState(0);
+  const [genreMovies, setGenreMovies] = useState(null as Movie[]);
+  const [totalPages, setTotalPages] = useState(0);
   const currentPage: number = !!page ? Number(page) : 1;
+
+  // const [byGenreMovies, setByGenreMovies] = useState(null as Movie[])
 
   const history = useHistory();
 
-  React.useEffect(() => {
+  useEffect(() => {
+    // getByGenreMovies(currentPage)
+      
     getGenreMovies(currentPage, Number(id)).then((respone) => {
       setGenreMovies(respone.data.results.slice(0, 15));
       setTotalPages(respone.data.total_pages);

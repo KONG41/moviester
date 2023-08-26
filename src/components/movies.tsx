@@ -15,7 +15,7 @@ interface Movie {
 
 const Movies = () => {
     const match = useRouteMatch();
-
+    console.log(match.path);
     return (
         <Switch>
             <Route path={`${match.path}/filter/:filter/Page/:page`}>
@@ -24,7 +24,7 @@ const Movies = () => {
             <Route path={`${match.path}/filter/:filter`}>
                 <FilterdMovies />
             </Route>
-            <Route path={`${match.path}/:id`}>
+            <Route path={`${match.path}/:cat/:id`}>
                 <MovieDetail />
             </Route>
         </Switch>

@@ -14,13 +14,12 @@ const MovieCard = ({ poster, title, releaseDate, voteAverage, id }: Props) => {
     return (
         <div className="movieCard">
             <div>
-                <Link to={`${id}`}>
+                <Link to={`/movies${id}`}>
                     <img src={`${poster}`} />
-                    {/* <img src={`${thumbnailPath}/${poster}`} /> */}
                 </Link>
             </div>
             <div>
-                <Link to={`${id}`} className="movieCard__title">{title}</Link>
+                <Link to={`/movies/movie_detail?id=${id}`} className="movieCard__title">{title}</Link>
                 <a className="movieCard__releaseDate"><i className="far fa-calendar-alt"></i> {releaseDate}</a>
                 <a><i className="fas fa-star"></i> {voteAverage}</a>
             </div>
