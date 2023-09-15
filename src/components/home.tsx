@@ -30,7 +30,7 @@ const Home = () => {
                 homeMovies.map((item)=>(
                     <section className="container container--pall">
                     <div className="trending">
-                      
+                        <h2 className="text-white">Hello</h2>
                         <h2 className="trending__title">{item.title}</h2>
                         <div className="trending__movies">
                             {item.movies.map((movie:any) => {
