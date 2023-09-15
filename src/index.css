@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'MplusBlack';
+    src: url('./assets/fonts/MPLUSRounded1c-Black.ttf') format("truetype");
+
+    font-family: 'MplusRegular';
+    src: url('./assets/fonts/MPLUSRounded1c-Regular.ttf') format("truetype");
+
+    font-family: 'MplusMedium';
+    src: url('./assets/fonts/MPLUSRounded1c-Medium.ttf') format("truetype");
+    
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+      font-family: MplusRegular, system-ui, sans-serif;
+    }
+  }
+
