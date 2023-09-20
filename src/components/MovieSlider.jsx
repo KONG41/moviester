@@ -13,18 +13,17 @@ import { FreeMode, Scrollbar, Pagination } from 'swiper/modules';
 const MovieSlider = ({data,title}) => {
   console.log('MovieSlide',data)
   return (
-    <section className="w-full p-[20px]">
-      <h1 className='text-center font-bold text-xl text-[#4D3C77] py-10'>{title}</h1>
+    <section className="w-full p-[20px] absolute bottom-[-1rem] z-10">
+      <h1 className='text-center font-bold text-xl text-white py-10'>{title}</h1>
       <Swiper
         slidesPerView={4.2}
         spaceBetween={30}
         freeMode={true}
-        pagination={{
-          clickable: true,
-          type: 'progressbar'
+        scrollbar={{
+          hide: true,
         }}
         modules={[FreeMode, Scrollbar, Pagination]}
-        className="mySwiper"
+        className="slidePagination"
       >
          {
           data ? data.map((item,index)=>(

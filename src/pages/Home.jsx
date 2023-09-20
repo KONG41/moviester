@@ -6,7 +6,8 @@ import MovieCard from '../components/MovieCard';
 const Home = () => {
   const [HomeData, setHomeData] = useState();
   const [Trending, setTrending] = useState();
-  // console.log(HomeData);
+  const [MovieData, setMovieData] = useState([]);
+  let array;
   useEffect(() => {
     getHomes().then((res)=>{setHomeData(res.data.data)})
   }, [])
@@ -16,6 +17,8 @@ const Home = () => {
       HomeData.forEach(e => {
         if(e.title == "Trending Movie"){
           setTrending(e.movies);
+        }else{
+         console.log(e)
         }
       });
     }
@@ -23,7 +26,7 @@ const Home = () => {
   return (
    <section className='w-full'>
       <CoverSlider />
-      <MovieSlider data={Trending} title="Trending Now"/>
+      <MovieSlider data={Trending} title=""/>
       <MovieCard data={HomeData}/>
    </section>
   )

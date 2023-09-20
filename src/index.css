@@ -9,6 +9,9 @@
     src: url('./assets/fonts/MPLUSRounded1c-Medium.ttf') format("truetype");
     
 }
+body{
+  background-color: #181818;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

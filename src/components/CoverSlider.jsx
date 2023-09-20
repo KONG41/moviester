@@ -12,7 +12,7 @@ const CoverSlider = () => {
         getSliders().then((res)=>{setSliderData(res.data.data)})
     }, [])
   return (
-    <div className='w-full bg-slate-400'>
+    <div className='w-full bg-slate-400 mb-[130px]'>
         <Swiper
         scrollbar={{
           hide: true,
@@ -22,15 +22,15 @@ const CoverSlider = () => {
           delay: 2500,
           disableOnInteraction: false,
         }}
-        modules={[Scrollbar, Autoplay]}
+        modules={[Autoplay]}
         className="mySwiper"
       >
         { sliderData ?
             sliderData.map((item,index)=>(
                 <SwiperSlide>
                     <Link to={item.link}>
-                        <div className="w-full h-[800px] bg-cover flex flex-col justify-end before:content-[''] before:bg-black before:h-full before:w-full before:absolute before:opacity-50" style={{ backgroundImage: `url(${item.cover})` }}>
-                            <div className='px-[200px] pb-[300px]'>
+                        <div className="w-full h-[900px] bg-cover flex flex-col justify-end before:content-[''] before:bg-black before:h-full before:w-full before:absolute before:opacity-50" style={{ backgroundImage: `url(${item.cover})` }}>
+                            <div className='px-[200px] pb-[300px] mb-[150px]'>
                                
                                 <div className='absolute z-10 w-full'>
                                     <h1 className="text-white text-[42px] font-bold">{item.title}</h1>
