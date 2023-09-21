@@ -12,7 +12,7 @@ const routes = [
         el: <Genre />
     },
     {
-        path: "/details",
+        path: "/movie/:id",
         el: <MovieDetail />
     }
 ]

@@ -12,7 +12,7 @@ const MovieCard = ({data}) => {
                     <div className="flex flex-wrap">
                         {
                           item.movies.map((movie,index_movie)=>(
-                            <Link to={movie.link} key={`${index_movie}_${movie.title}`}>
+                            <Link to={`${movie.link}`} key={`${index_movie}_${movie.title}`}>
                                 <div className='w-[210px] m-2 mb-6'>
                                     <div className='w-[210px] h-[270px] rounded-lg bg-slate-400 hover:shadow-25xl relative group' style={{ backgroundImage: `url(${movie.cover})` }}>
                                         <span className='absolute text-6xl hidden items-center justify-center w-full h-full bg-gradient-to-t from-[#ffb30081] rounded-lg from-5% group-hover:flex'><IoIosPlayCircle className="opacity-80"/></span>

@@ -12,7 +12,7 @@ const CoverSlider = () => {
         getSliders().then((res)=>{setSliderData(res.data.data)})
     }, [])
   return (
-    <div className='w-full bg-slate-400 mb-[130px]'>
+    <div className='w-full mb-[130px]'>
         <Swiper
         scrollbar={{
           hide: true,
