@@ -1,6 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {IoIosPlayCircle} from 'react-icons/io'
+import Loading from '../components/Loading'
+import SectionTitle from './widgets/SectionTitle'
 const MovieCard = ({data}) => {
     console.log('Movie Cart',data);
   return (
@@ -8,7 +10,8 @@ const MovieCard = ({data}) => {
         {  data ? 
             data.map((item,index)=>(
                 <div key={item.title} className="border-b-2 last:border-0 border-[#e6e4ec42]"> 
-                    <h1  className='text-left font-bold text-3xl text-[#fff] py-10'>{item.title}</h1>
+                    {/* <h1  className='text-left font-bold text-3xl text-[#fff] py-10'>{item.title}</h1> */}
+                    <SectionTitle title={item.title} />
                     <div className="flex flex-wrap">
                         {
                           item.movies.map((movie,index_movie)=>(
@@ -32,7 +35,7 @@ const MovieCard = ({data}) => {
                         }
                     </div>
                  </div>
-            ))  : <div>Loading</div>
+            ))  : <Loading />
         }
         
     </section>

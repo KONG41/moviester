@@ -3,17 +3,19 @@ import { useParams } from 'react-router-dom';
 import { getDetailMovie } from '../helpers/FetchData';
 import {IoIosPlayCircle} from 'react-icons/io';
 import {CiServer} from 'react-icons/ci';
+import SectionTitle from '../components/widgets/SectionTitle';
+import Loading from '../components/Loading';
+
 const MovieDetail = () => {
   const {id} = useParams();
   const [movieDetail,setMovieDetail] = useState();
-  console.log('Movie Detail: ',movieDetail);
   useEffect(() => {
     getDetailMovie(id).then((res)=>{setMovieDetail(res.data.data)});
   }, [])
   return (
     <section className="text-whit">
       {
-        movieDetail &&
+        movieDetail ?
         <div>
           <div className='w-full h-[70vh]  relative'>
             <img src={movieDetail.img_cover} className='w-full h-full top-0 object-cover object-top'/>
@@ -43,22 +45,26 @@ const MovieDetail = () => {
              </div>
             </div>
           </div>
-          {/* <div className='px-40'>
-            <h1 className='text-3xl text-white font-bold'>RECOMMENDED</h1>
+          <div className='px-40'>
+            <SectionTitle title="RECOMMENDED" />
             <div className='my-3 w-[520px]'>
-              {movieDetail.more-moive.moive.map((item, index)=>  (
-                <div className='flex flex-row items-center w-[] bg-black w-'>
-                  <img src={item.cover}/>
-                  <div>
-                    <span> movie / 2023 / 105 min</span>
-                    <p>title</p>
-                  </div>
-                </div>
+              {movieDetail["more-moive"] && movieDetail["more-moive"].map((item, index)=>  (
+                item.movies.map((item,index)=>(
+                  <a href={item.link} key={item.title} className='flex flex-row items-center bg-[#0f0f0f] my-3 rounded-lg h-[80px] gap-4 group hover:bg-[#ffb400] hover:cursor-pointer'>
+                    <img src={item.cover} alt={item.title} className='h-full rounded-s-lg'/>
+                    <div className='text-white'>
+                      <span className="font-light text-sm text-[#888] group-hover:text-[#0f0f0f]"> {item.type} / {item.year} {!item.duration == '' && `/ ${item.duration}`}</span>
+                      <p className="font-semibold text-[#cdcdcd] group-hover:text-[#0f0f0f]">{item.title}</p>
+                    </div>
+                  </a>
+                ))
               ))}
               
             </div>
-          </div> */}
+          </div>
         </div>
+        :
+       <Loading />
       }
        
     </section>
