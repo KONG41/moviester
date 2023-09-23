@@ -1,17 +1,57 @@
-import React, { useEffect, useState } from 'react';
+import React, { startTransition, useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { getDetailMovie } from '../helpers/FetchData';
 import {IoIosPlayCircle} from 'react-icons/io';
 import {CiServer} from 'react-icons/ci';
+import {CgClose} from 'react-icons/cg';
 import SectionTitle from '../components/widgets/SectionTitle';
 import Loading from '../components/Loading';
+import videojs from 'video.js';
+import 'video.js/dist/video-js.css';
+import Modal from "react-modal";
+const Video = (props) => {
+  const videoNode = useRef(null);
+  const [player, setPlayer] = useState(null);
+  useEffect(() => {
+    if (videoNode.current) {
+      const _player = videojs(videoNode.current,props);
+      setPlayer(_player);
+      return () => {
+        if (player !== null) {
+          player.dispose();
+        }
+      };
+    }
+  }, []);
+
+  return (
+    <div data-vjs-player>
+      <video ref={videoNode} className="video-js"></video>
+    </div>
+  );
+};
+
 
 const MovieDetail = () => {
   const {id} = useParams();
   const [movieDetail,setMovieDetail] = useState();
+  const [stream,setStream] = useState();
+  const [isPlay, setIsPlay] = useState(false);
+  
+  const handlePlayMovie = () => {
+    setIsPlay(!isPlay);
+  }
+  // const handleClose  = () =>{
+  //   setisClose
+  // }
   useEffect(() => {
-    getDetailMovie(id).then((res)=>{setMovieDetail(res.data.data)});
+    getDetailMovie(id).then((res)=>{
+      setMovieDetail(res.data.data);
+      setStream(res.data.data.stream);
+    });
+
   }, [])
+
   return (
     <section className="text-whit">
       {
@@ -19,8 +59,45 @@ const MovieDetail = () => {
         <div>
           <div className='w-full h-[70vh]  relative'>
             <img src={movieDetail.img_cover} className='w-full h-full top-0 object-cover object-top'/>
-            <span className='absolute top-0 w-full h-full flex justify-center items-center text-9xl'><IoIosPlayCircle className='text-[#ffb300d7] hover:text-[#ffb400] hover:cursor-pointer'/></span>
+            <span className='absolute top-0 w-full h-full flex justify-center items-center text-9xl' onClick={handlePlayMovie}><IoIosPlayCircle className='text-[#ffb300d7] hover:text-[#ffb400] hover:cursor-pointer'/></span>
           </div>
+          <Modal
+            isOpen={isPlay}
+            contentLabel="Modal"
+            className={{
+              base: "w-[90%] h-[auto] modal-base",
+              afterOpen: "modal-base_after-open",
+              beforeClose: "modal-base_before-close"
+            }}
+            overlayClassName={{
+              base: "overlay-base flex justify-center item-center",
+              afterOpen: "overlay-base_after-open",
+              beforeClose: "overlay-base_before-close"
+            }}
+            shouldCloseOnOverlayClick={true}
+            closeTimeoutMS={1000}
+          >
+              <button onClick={handlePlayMovie} className='float-right text-[#f6511d]'><CgClose/></button>
+              <Video {...{
+                  fill: true,
+                  fluid: true,
+                  autoplay: false,
+                  controls: true,
+                  preload: "metadata",
+                  poster: `${movieDetail.img_cover}`,
+                  sources: [
+                    {
+                      src: `${stream.source.file}`,
+                      type: "application/x-mpegURL"
+                    }
+                  ]}}
+              />
+      
+
+            
+          </Modal>
+          
+         
           <div className='w-full'>
             {/* server play */}
             <div className='m-[auto] w-fit bg-black rounded-full my-7'>
@@ -44,6 +121,9 @@ const MovieDetail = () => {
                 <div className='font-semibold py-1'><h1 className='text-[#888888] w-40 inline-block' >Production:</h1><span className='text-[#cdcdcd]'>{movieDetail.productions && movieDetail.productions.map((item,index)=>(<a key={`casts_${index}`} href={item.href}>{item.title}, </a>))}</span></div>
              </div>
             </div>
+           
+           
+                        
           </div>
           <div className='px-40'>
             <SectionTitle title="RECOMMENDED" />
