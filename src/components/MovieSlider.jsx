@@ -11,7 +11,6 @@ import 'swiper/css/pagination';
 import { FreeMode, Scrollbar, Pagination } from 'swiper/modules';
 
 const MovieSlider = ({data,title}) => {
-  console.log('MovieSlide',data)
   return (
     <section className="w-full p-[20px] absolute bottom-[-1rem] z-10">
       <h1 className='text-center font-bold text-xl text-white py-10'>{title}</h1>
@@ -26,7 +25,7 @@ const MovieSlider = ({data,title}) => {
         className="slidePagination"
       >
          {
-          data ? data.map((item,index)=>(
+          data && data.map((item,index)=>(
             <SwiperSlide key={item.title}>
               <Link to={item.link}>
                 <div className='w-[410px] bg-slate-400 h-[270px] rounded-xl bg-cover p-5 align-bottom flex flex-col justify-end hover:' style={{ backgroundImage: `url(${item.cover})` }}>
@@ -36,7 +35,7 @@ const MovieSlider = ({data,title}) => {
               </Link>
               
             </SwiperSlide>
-          )) : <div>Loading</div>
+          ))
         }
       </Swiper>
        

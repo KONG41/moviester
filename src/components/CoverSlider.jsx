@@ -7,7 +7,6 @@ import 'swiper/css/scrollbar';
 import { Scrollbar,  Autoplay } from 'swiper/modules';
 const CoverSlider = () => {
     const [sliderData, setSliderData] = useState();
-    console.log('SlideData',sliderData)
     useEffect(() => {
         getSliders().then((res)=>{setSliderData(res.data.data)})
     }, [])
@@ -25,7 +24,7 @@ const CoverSlider = () => {
         modules={[Autoplay]}
         className="mySwiper"
       >
-        { sliderData ?
+        { sliderData &&
             sliderData.map((item,index)=>(
                 <SwiperSlide>
                     <Link to={item.link}>
@@ -48,7 +47,7 @@ const CoverSlider = () => {
                     </Link>
                     
                 </SwiperSlide>
-            )) : <span>loading</span>
+            ))
         }
         
       </Swiper>

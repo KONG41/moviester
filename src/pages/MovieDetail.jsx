@@ -48,7 +48,7 @@ const MovieDetail = () => {
           <div className='px-40'>
             <SectionTitle title="RECOMMENDED" />
             <div className='my-3 w-[520px]'>
-              {movieDetail["more-moive"] && movieDetail["more-moive"].map((item, index)=>  (
+              {movieDetail["more-movie"] && movieDetail["more-movie"].map((item, index)=>  (
                 item.movies.map((item,index)=>(
                   <a href={item.link} key={item.title} className='flex flex-row items-center bg-[#0f0f0f] my-3 rounded-lg h-[80px] gap-4 group hover:bg-[#ffb400] hover:cursor-pointer'>
                     <img src={item.cover} alt={item.title} className='h-full rounded-s-lg'/>

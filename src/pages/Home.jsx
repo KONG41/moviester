@@ -3,6 +3,7 @@ import { getHomes } from '../helpers/FetchData'
 import CoverSlider from '../components/CoverSlider'
 import MovieSlider from '../components/MovieSlider';
 import MovieCard from '../components/MovieCard';
+import Loading from '../components/Loading';
 const Home = () => {
   const [HomeData, setHomeData] = useState();
   const [Trending, setTrending] = useState();
@@ -18,16 +19,23 @@ const Home = () => {
         if(e.title == "Trending Movie"){
           setTrending(e.movies);
         }else{
-         console.log(e)
+         console.log('no trending data')
         }
       });
     }
   },[HomeData])
   return (
    <section className='w-full'>
-      <CoverSlider />
-      <MovieSlider data={Trending} title=""/>
-      <MovieCard data={HomeData}/>
+    {
+      HomeData ? 
+      <>
+        <CoverSlider />
+        <MovieSlider data={Trending} title=""/>
+        <MovieCard data={HomeData}/>
+      </>
+      : <Loading/>
+    }
+      
    </section>
   )
 }
