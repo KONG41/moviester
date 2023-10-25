@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const config = {
-    baseURL: 'https://c335o4nzj4.execute-api.us-east-1.amazonaws.com',
+    baseURL: 'https://moviester-api-py.vercel.app',
     headers:{
         'Accept': '*/*',
         'Connection': 'keep-alive'

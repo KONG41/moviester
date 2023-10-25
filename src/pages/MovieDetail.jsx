@@ -57,7 +57,7 @@ const MovieDetail = () => {
       {
         movieDetail ?
         <div>
-          <div className='w-full h-[70vh]  relative'>
+          <div className='w-full md:h-[70vh] h-[50vh]  relative'>
             <img src={movieDetail.img_cover} className='w-full h-full top-0 object-cover object-top'/>
             <span className='absolute top-0 w-full h-full flex justify-center items-center text-9xl' onClick={handlePlayMovie}><IoIosPlayCircle className='text-[#ffb300d7] hover:text-[#ffb400] hover:cursor-pointer'/></span>
           </div>
@@ -101,12 +101,12 @@ const MovieDetail = () => {
           <div className='w-full'>
             {/* server play */}
             <div className='m-[auto] w-fit bg-black rounded-full my-7'>
-              <span className="text-[#000] inline-block px-7 py-3 rounded-full font-semibold hover:bg-[#ffb400] hover:text-black hover:cursor-pointer bg-[#ffb400]">Vidplay <CiServer    className='inline-block text-lg'/></span>
-              <span className="text-[#888] inline-block px-7 py-3 rounded-full font-semibold hover:bg-[#ffb400] hover:text-black hover:cursor-pointer">Filemoon <CiServer   className='inline-block text-lg'/></span>
-              <span className="text-[#888] inline-block px-7 py-3 rounded-full font-semibold hover:bg-[#ffb400] hover:text-black hover:cursor-pointer">MyCloud <CiServer    className='inline-block text-lg'/></span>
-              <span className="text-[#888] inline-block px-7 py-3 rounded-full font-semibold hover:bg-[#ffb400] hover:text-black hover:cursor-pointer">Streamtape <CiServer className='inline-block text-lg'/></span>
+              <span className="text-[#000] md:text-base text-sm inline-block md:px-7 px-3 md:py-3 py-1 rounded-full font-semibold hover:bg-[#ffb400] hover:text-black hover:cursor-pointer bg-[#ffb400]">Vidplay <CiServer    className='inline-block text-lg'/></span>
+              <span className="text-[#888] md:text-base text-sm inline-block md:px-7 px-3 md:py-3 py-1 rounded-full font-semibold hover:bg-[#ffb400] hover:text-black hover:cursor-pointer">Filemoon <CiServer   className='inline-block text-lg'/></span>
+              <span className="text-[#888] md:text-base text-sm inline-block md:px-7 px-3 md:py-3 py-1 rounded-full font-semibold hover:bg-[#ffb400] hover:text-black hover:cursor-pointer">MyCloud <CiServer    className='inline-block text-lg'/></span>
+              <span className="text-[#888] md:text-base text-sm inline-block md:px-7 px-3 md:py-3 py-1 rounded-full font-semibold hover:bg-[#ffb400] hover:text-black hover:cursor-pointer">Streamtape <CiServer className='inline-block text-lg'/></span>
             </div>
-            <div className='w-full px-40 flex gap-8 flex-row text-white my-24'>
+            <div className='w-full md:px-40 px-3 flex gap-8 md:flex-row flex-col text-white my-24'>
              <img src={movieDetail.img_cover} alt={movieDetail.img_cover} className='w-[500px] rounded-lg'/> 
              <div>
                 <h1 className='text-3xl font-bold text-[#dedede]'>{movieDetail.title}</h1>
@@ -125,9 +125,9 @@ const MovieDetail = () => {
            
                         
           </div>
-          <div className='px-40'>
+          <div className='md:px-40 px-3'>
             <SectionTitle title="RECOMMENDED" />
-            <div className='my-3 w-[520px]'>
+            <div className='my-3 md:w-[520px] w-full'>
               {movieDetail["more-movie"] && movieDetail["more-movie"].map((item, index)=>  (
                 item.movies.map((item,index)=>(
                   <a href={item.link} key={item.title} className='flex flex-row items-center bg-[#0f0f0f] my-3 rounded-lg h-[80px] gap-4 group hover:bg-[#ffb400] hover:cursor-pointer'>
